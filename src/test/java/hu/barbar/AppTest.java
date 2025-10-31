@@ -15,15 +15,6 @@ import java.awt.event.KeyEvent;
  */
 public class AppTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
-
     @Ignore
     @Test
     public void altTabTest(){
@@ -47,7 +38,7 @@ public class AppTest
 
     @Test
     public void readConfigJson(){
-        JSONObject conf = FileHandler.readJSON("config.json");
+        JSONObject conf = FileHandler.readJSON("mm_config.json");
         if(conf != null) {
             System.out.println("Conf: " + conf);
             long val = (long) conf.getOrDefault("range in px", 30l);
