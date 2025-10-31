@@ -1,0 +1,9 @@
+{
+	"range in px": 5,
+	"wasd": false,
+	"mm": true,
+	"wait in ms":{
+		"min": 3000,
+		"max": 12000
+	}
+}
