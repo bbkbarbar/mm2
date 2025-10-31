@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>hu.barbar</groupId>
     <artifactId>mm</artifactId>
-    <version>1.3-RC</version>
+    <version>1.4-RC</version>
     <name>mm</name>
     <url>http://www.example.com</url>
     <packaging>jar</packaging>

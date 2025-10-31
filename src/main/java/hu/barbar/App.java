@@ -3,9 +3,9 @@ package hu.barbar;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
+
 import hu.barbar.util.FileHandler;
 import org.json.simple.JSONObject;
 
@@ -26,6 +26,7 @@ public class App {
     long moveRange = DEFAULT_MOVE_RANGE;
 
     boolean moveWASD = false;
+    boolean wasdRandomOrderNeeded = false;
     boolean mouseMovement = true;
     boolean needAltTab = false;
 
@@ -93,11 +94,17 @@ public class App {
                     int pressLength = 500;
                     int waitBetween = 200;
 
-                    keyPressAndRelease(robot, pressLength, waitBetween,  'W');
-                    keyPressAndRelease(robot, pressLength, waitBetween,  'A');
-                    keyPressAndRelease(robot, pressLength, waitBetween,  'S');
-                    keyPressAndRelease(robot, pressLength, waitBetween,  'D');
-                    
+                    List<Character> keys = new ArrayList<>(Arrays.asList('W', 'A', 'S', 'D'));
+
+                    // véletlen sorrend
+                    if(wasdRandomOrderNeeded) {
+                        Collections.shuffle(keys);
+                    }
+
+                    for (char key : keys) {
+                        keyPressAndRelease(robot, pressLength, waitBetween, key);
+                    }
+
                 }
 
 
@@ -135,6 +142,7 @@ public class App {
             moveRange = (long) conf.getOrDefault("range in px", 30l);
 
             moveWASD = (boolean) conf.getOrDefault("wasd", false);
+            wasdRandomOrderNeeded = (boolean) conf.getOrDefault("wasd_random_order", false);
             mouseMovement = (boolean) conf.getOrDefault("mm", true);
             needAltTab = (boolean) conf.getOrDefault("need_alt_tab", false);
 
@@ -149,14 +157,29 @@ public class App {
                 //TODO
                 System.out.println("Can not read wait params..");
             }
-            System.out.println("min wait: " + minWaitParam/1000 + " s");
-            System.out.println("max wait: " + maxWaitParam/1000 + " s");
-            System.out.println("movement range in px: " + moveRange + " px");
+            System.out.println("min wait: " + minWaitParam / 1000 + " s");
+            System.out.println("max wait: " + maxWaitParam / 1000 + " s");
+
+            System.out.println("Mouse movement: " + mouseMovement);
+            if (mouseMovement){
+                System.out.println("movement range in px: " + moveRange + " px");
+            }
+            System.out.println("WASD keypress: " + moveWASD);
+            if(moveWASD) {
+                System.out.println("WASD in random order: " + wasdRandomOrderNeeded);
+            }
         }else{
             System.out.println("Config file (\""+ CONFIG_FILE_NAME + "\") can not be found..\nTry to create it with default parameters:");
             System.out.println("\tMin wait in ms: " + DEFAULT_WAIT_MIN_IN_MS);
             System.out.println("\tMax wait in ms: " + DEFAULT_WAIT_MAX_IN_MS);
-            System.out.println("\tMovement range in px: " + DEFAULT_MOVE_RANGE);
+            System.out.println("Mouse movement: " + mouseMovement);
+            if (mouseMovement){
+                System.out.println("movement range in px: " + moveRange + " px");
+            }
+            System.out.println("WASD keypress: " + moveWASD);
+            if(moveWASD) {
+                System.out.println("WASD in random order: " + wasdRandomOrderNeeded);
+            }
             createDefaultConfigFile();
         }
     }
@@ -170,6 +193,7 @@ public class App {
         linesOfDefaultConfigFile.add("{\n" +
                 "\t\"range in px\": " + DEFAULT_MOVE_RANGE + ",\n" +
                 "\t\"wasd\": " + DEFAULT_WASD + ",\n" +
+                "\t\"wasd_random_order\": " + false + ",\n" +
                 "\t\"mm\": " + DEFAULT_MOUSE_MOVEMENT + ",\n" +
                 "\t\"wait in ms\":{\n" +
                 "\t\t\"min\": " + (long)DEFAULT_WAIT_MIN_IN_MS + ",\n" +
