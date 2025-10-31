@@ -1,0 +1,7 @@
+{
+	"range in px": 30,
+	"wait in ms":{
+		"min": 3000,
+		"max": 50000
+	}
+}
