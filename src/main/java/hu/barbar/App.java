@@ -93,26 +93,11 @@ public class App {
                     int pressLength = 500;
                     int waitBetween = 200;
 
-                    robot.keyPress('W');
-                    Thread.sleep(pressLength);
-                    robot.keyRelease('W');
-                    Thread.sleep(waitBetween);
-
-                    robot.keyPress('A');
-                    Thread.sleep(pressLength);
-                    robot.keyRelease('A');
-                    Thread.sleep(waitBetween);
-
-                    robot.keyPress('S');
-                    Thread.sleep(pressLength);
-                    robot.keyRelease('S');
-                    Thread.sleep(waitBetween);
-
-                    robot.keyPress('D');
-                    Thread.sleep(pressLength);
-                    robot.keyRelease('D');
-                    Thread.sleep(waitBetween);
-
+                    keyPressAndRelease(robot, pressLength, waitBetween,  'W');
+                    keyPressAndRelease(robot, pressLength, waitBetween,  'A');
+                    keyPressAndRelease(robot, pressLength, waitBetween,  'S');
+                    keyPressAndRelease(robot, pressLength, waitBetween,  'D');
+                    
                 }
 
 
@@ -134,6 +119,13 @@ public class App {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void keyPressAndRelease(Robot robot, int pressLength, int waitBetween, int keyCode) throws InterruptedException {
+        robot.keyPress(keyCode);
+        Thread.sleep(pressLength);
+        robot.keyRelease(keyCode);
+        Thread.sleep(waitBetween);
     }
 
     private void readConfigs() {
