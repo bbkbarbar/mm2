@@ -15,11 +15,25 @@ import java.awt.event.KeyEvent;
  */
 public class AppTest 
 {
-    @Ignore
+
     @Test
     public void altTabTest(){
 
         Robot r = null;
+        try {
+            r = new Robot();
+            r.keyPress(KeyEvent.VK_ALT);
+            Thread.sleep(100);
+            r.keyPress(KeyEvent.VK_TAB);
+            Thread.sleep(100);
+            r.keyRelease(KeyEvent.VK_TAB);
+            r.keyRelease(KeyEvent.VK_ALT);
+
+            //r.keyPress(KeyEvent.VK_TAB);
+        }catch (Exception e){
+
+        }
+
         try {
             r = new Robot();
             r.keyPress(KeyEvent.VK_ALT);
@@ -66,10 +80,9 @@ public class AppTest
         }
     }
 
-    @Ignore
     @Test
     public void createConfigFileTest(){
-        App.createDefaultConfigFile();
+        App.createDefaultConfigFile("testConfig.json");
     }
 
 

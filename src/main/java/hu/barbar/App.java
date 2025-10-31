@@ -170,6 +170,10 @@ public class App {
     }
 
     public static void createDefaultConfigFile(){
+        createDefaultConfigFile(CONFIG_FILE_NAME);
+    }
+
+    public static void createDefaultConfigFile(String configFileName){
         ArrayList<String> linesOfDefaultConfigFile = new ArrayList<String>();
         linesOfDefaultConfigFile.add("{\n" +
                 "\t\"range in px\": " + DEFAULT_MOVE_RANGE + ",\n" +
@@ -180,7 +184,7 @@ public class App {
                 "\t\t\"max\": " + (long)DEFAULT_WAIT_MAX_IN_MS + "\n" +
                 "\t}\n" +
                 "}");
-        FileHandler.writeToFile(CONFIG_FILE_NAME, linesOfDefaultConfigFile);
+        FileHandler.writeToFile(configFileName, linesOfDefaultConfigFile);
     }
 
 }
