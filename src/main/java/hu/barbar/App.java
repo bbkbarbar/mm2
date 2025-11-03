@@ -37,7 +37,7 @@ public class App {
         new App();
     }
 
-    private void doAltTab(){
+    static void doAltTab(){
         Robot r = null;
         try {
             r = new Robot();

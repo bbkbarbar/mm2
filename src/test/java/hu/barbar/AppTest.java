@@ -18,36 +18,8 @@ public class AppTest
 
     @Test
     public void altTabTest(){
-
-        Robot r = null;
-        try {
-            r = new Robot();
-            r.keyPress(KeyEvent.VK_ALT);
-            Thread.sleep(100);
-            r.keyPress(KeyEvent.VK_TAB);
-            Thread.sleep(100);
-            r.keyRelease(KeyEvent.VK_TAB);
-            r.keyRelease(KeyEvent.VK_ALT);
-
-            //r.keyPress(KeyEvent.VK_TAB);
-        }catch (Exception e){
-
-        }
-
-        try {
-            r = new Robot();
-            r.keyPress(KeyEvent.VK_ALT);
-            Thread.sleep(100);
-            r.keyPress(KeyEvent.VK_TAB);
-            Thread.sleep(100);
-            r.keyRelease(KeyEvent.VK_TAB);
-            r.keyRelease(KeyEvent.VK_ALT);
-
-            //r.keyPress(KeyEvent.VK_TAB);
-        }catch (Exception e){
-
-        }
-
+        App.doAltTab();
+        App.doAltTab();
     }
 
     @Test
